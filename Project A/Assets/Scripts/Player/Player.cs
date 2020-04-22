@@ -8,6 +8,8 @@ public class Player : MonoBehaviour, IDamagable
 {
 	[SerializeField] private float speed = 5;
 
+	public CameraController Camera;
+
 	private Rigidbody _rigidbody;
 	private Vector3 _moveVelocity;
 
