@@ -5,33 +5,76 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 	[SerializeField] private Transform player;
+
+	// The offset the camera should be from the player
 	[SerializeField] private Vector3 offset;
 
+	// The Room we are currently in
+	// NOTE:(Nathen) If this is null the camera should follow the player
 	public Room targetRoom;
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (targetRoom == null) return;
-
-		bool inBounds = CheckBounds();
-
-		if (inBounds)
+		if (targetRoom)
 		{
-			print("in");
-			transform.position = Vector3.Lerp(transform.position, player.position + offset, 0.1f);
+			Vector3 roomOffset = new Vector3(0, 8.5f, -4);
+			Vector3 roomCenter = targetRoom.transform.position + new Vector3(targetRoom.Size.x, 0, -targetRoom.Size.y) / 2;
+			Vector3 roomPosition = roomCenter + roomOffset;
+
+			Vector3 targetPos = player.transform.position;
+
+			// TODO: These are currently being calculated from the center out,
+			// we need to go from the sides in
+
+			float side = 8f;
+			float top = 6f;
+			float bot = 5f;
+
+			// Left and Right
+			if (targetRoom.Size.x <= side * 2)
+			{
+				targetPos.x = roomCenter.x;
+			}
+			else
+			{
+				// Left
+				if (player.transform.position.x < roomCenter.x - (targetRoom.Size.x / 2) + side) {
+					targetPos.x = roomCenter.x - targetRoom.Size.x / 2 + side;
+				}
+
+				// Right
+				if (player.transform.position.x > roomCenter.x + (targetRoom.Size.x / 2) - side) {
+					targetPos.x = roomCenter.x + targetRoom.Size.x / 2 - side;
+				}
+			}
+
+			// Up and Down
+			if (targetRoom.Size.y <= top + bot)
+			{
+				targetPos.z = roomCenter.z;
+			}
+			else
+			{
+				// Up
+				if (player.transform.position.z > roomCenter.z + (targetRoom.Size.y / 2) - top)
+				{
+					targetPos.z = roomCenter.z + targetRoom.Size.y / 2 - top;
+				}
+
+				// Down
+				if (player.transform.position.z < roomCenter.z - (targetRoom.Size.y / 2) + bot)
+				{
+					targetPos.z = roomCenter.z - targetRoom.Size.y / 2 + bot;
+				}
+			}
+			
+			// Move the camera
+			transform.position = Vector3.Lerp(transform.position, targetPos + roomOffset, 0.1f);
 		}
 		else
 		{
-			print("out");
-			transform.position = Vector3.Lerp(transform.position, targetRoom.transform.position + offset, 0.1f);
+			transform.position = Vector3.Lerp(transform.position, player.position + offset, 0.1f);
 		}
-	}
-
-	bool CheckBounds()
-	{
-		Vector3 pos = player.position;
-		if (pos.x > targetRoom.Left && pos.x < targetRoom.Right && pos.z < targetRoom.Top && pos.z > targetRoom.Down) return true;
-		return false;
 	}
 }

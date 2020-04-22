@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class Player : MonoBehaviour, IDamagable
+public class Player : MonoBehaviour, IDamageable
 {
 	[SerializeField] private float speed = 5;
 

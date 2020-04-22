@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6585069483999341307}
   - component: {fileID: 6585069483999341304}
   - component: {fileID: 6585069483999341305}
-  - component: {fileID: 6585069483999341302}
+  - component: {fileID: 4995242322237781946}
   m_Layer: 0
-  m_Name: FireBlock
+  m_Name: Fire Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6585069483999341302
+--- !u!114 &4995242322237781946
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6585069483999341303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8320c9d374fcac642af5754e91608c72, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a00945976020f44f80a4fd4ca390e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 5
