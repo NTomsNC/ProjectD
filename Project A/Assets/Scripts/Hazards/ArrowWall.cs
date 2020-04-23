@@ -17,6 +17,9 @@ public class ArrowWall : MonoBehaviour
 		if ((_timer += Time.deltaTime) < interval) return;
 
 		if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, range)) {
+
+			if (hit.collider.tag != "Player") return;
+
 			if (Instantiate(projectile, transform.position, transform.rotation).TryGetComponent<IProjectile>(out IProjectile shot))
 			{
 				shot.Shoot();
