@@ -1,4 +1,4 @@
 ﻿public interface IProjectile
 {
-	void Shoot();
+	void OnShoot();
 }

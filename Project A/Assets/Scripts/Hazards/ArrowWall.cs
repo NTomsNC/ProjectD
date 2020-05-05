@@ -22,7 +22,7 @@ public class ArrowWall : MonoBehaviour
 
 			if (Instantiate(projectile, transform.position, transform.rotation).TryGetComponent<IProjectile>(out IProjectile shot))
 			{
-				shot.Shoot();
+				shot.OnShoot();
 			}
 			_timer = 0;
 		}

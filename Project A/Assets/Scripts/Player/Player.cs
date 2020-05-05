@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(PlayerController))]
 
 public class Player : MonoBehaviour, IDamageable
 {
 	[SerializeField] private float speed = 5;
 
-	public CameraController Camera;
+	[SerializeField] private float maxLife = 10;
+	[SerializeField] private float currentLife = 0;
 
-	private Rigidbody _rigidbody;
-	private Vector3 _moveVelocity;
+	private PlayerController _controller;
+	private UIPlayer _playerUI;
+
+	public CameraController Camera;
 
 	// Awake is called when this class is first initialized
 	void Awake()
 	{
-		_rigidbody = GetComponent<Rigidbody>();
+		_controller = GetComponent<PlayerController>();
+		_playerUI = FindObjectOfType<UIPlayer>();
 	}
-		
-	// Start is called before the first frame update
-	void Start()
-	{
 
+	private void Start()
+	{
+		currentLife = maxLife;
+
+		if (_playerUI) { _playerUI.SetLife(1); }	
 	}
 
 	// Update is called once per frame
@@ -31,14 +36,9 @@ public class Player : MonoBehaviour, IDamageable
 		float x = Input.GetAxisRaw("Horizontal");
 		float y = Input.GetAxisRaw("Vertical");
 
-		_moveVelocity = new Vector3(x, 0, y).normalized * speed;
+		Vector3 moveVelocity = new Vector3(x, 0, y).normalized * speed;
 
-		_rigidbody.MovePosition(_rigidbody.position + (_moveVelocity * Time.deltaTime));
-	}
-
-	// FixedUpdate is called 30 a second
-	private void FixedUpdate()
-	{
+		_controller.Move(moveVelocity);
 	}
 
 	// Interface:IDamagable -- Take damage
@@ -46,7 +46,12 @@ public class Player : MonoBehaviour, IDamageable
 	{
 		float damage = damageSource.GetDamage();
 
+		currentLife = Mathf.Clamp(currentLife - damage, 0, maxLife);
+
 		// TODO:(Nathen) Take Damage
 		Debug.Log("Taking Damage: " + damage);
+
+		// Update the player UI
+		if (_playerUI) { _playerUI.SetLife(currentLife / maxLife); }
 	}
 }

@@ -12,7 +12,7 @@ public class Room : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireCube(transform.position + new Vector3(size.x / 2, 3.5f, -size.y / 2), new Vector3(size.x, 0, size.y));
+		Gizmos.DrawWireCube(transform.position + new Vector3(size.x / 2, 4.5f, -size.y / 2), new Vector3(size.x, 0, size.y));
 	}
 
 	private void OnTriggerEnter(Collider other)

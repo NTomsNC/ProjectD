@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2804693383769743623}
   - component: {fileID: 5523095619741825992}
   - component: {fileID: 6862525991938106942}
-  - component: {fileID: 5097042408686967547}
   - component: {fileID: 6764828280436093511}
   m_Layer: 0
   m_Name: Arrow
@@ -108,19 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
---- !u!114 &5097042408686967547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4274949057669351902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5ee46b5c9a3aaf45b3a016ade1cdb26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1000
+  damage: 4.5
 --- !u!54 &6764828280436093511
 Rigidbody:
   m_ObjectHideFlags: 0
